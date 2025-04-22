@@ -1,0 +1,29 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor / IDE settings
+.vscode/
+.idea/
+
+# Environment files (like db connection strings)
+.env
+.env.*
+
+# SQL dumps and backups (optional — include only if these shouldn't be tracked)
+*.sql
+*.dump
+*.bak
+*.backup
+
+# DBeaver / DataGrip / DB client files
+.dbeaver/
+*.iml
+*.ipr
+*.iws
+
+# Logs
+*.log
+
+# Jupyter Notebooks 
+.ipynb_checkpoints/
