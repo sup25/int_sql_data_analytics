@@ -3,7 +3,7 @@
 Thumbs.db
 
 # Editor / IDE settings
-.vscode/
+.vscode
 .idea/
 
 # Environment files (like db connection strings)
@@ -11,7 +11,7 @@ Thumbs.db
 .env.*
 
 # SQL dumps and backups (optional — include only if these shouldn't be tracked)
-*.sql
+
 *.dump
 *.bak
 *.backup
