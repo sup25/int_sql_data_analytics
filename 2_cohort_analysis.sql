@@ -38,7 +38,6 @@ WITH customer_revenue AS (
             c.surname
 )
 
-
 SELECT 
     customerkey,
     total_net_revenue,
