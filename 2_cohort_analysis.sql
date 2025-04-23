@@ -1,14 +1,29 @@
--- Description: This script creates a view for cohort analysis, which includes customer revenue, number of orders, and other customer details.
+/*
+Cohort Analysis
 
-WITH customer_revenue  AS (
+This query creates a comprehensive view of customer behavior and demographics by:
+1. Calculating revenue metrics per customer
+2. Tracking first purchase dates to establish cohorts
+3. Combining sales data with customer demographics
+4. Grouping customers by their cohort year (year of first purchase)
 
+The analysis helps understand:
+- Customer spending patterns over time
+- Order frequency
+- Geographic distribution of customers
+- Age demographics
+- Revenue trends by cohort
+*/
+
+WITH customer_revenue AS (
+    
     SELECT 
         s.customerkey,
         s.orderdate,
-        SUM(quantity*netprice*exchangerate) AS total_net_revenue,
-        COUNT(s.orderkey) AS num_orders,
-        c.countryfull,
-        c.age,
+        SUM(quantity*netprice*exchangerate) AS total_net_revenue,  
+        COUNT(s.orderkey) AS num_orders,                          
+        c.countryfull,                                            
+        c.age,                                                    
         c.givenname,
         c.surname
        
@@ -23,6 +38,7 @@ WITH customer_revenue  AS (
             c.surname
 )
 
+
 SELECT 
     customerkey,
     total_net_revenue,
@@ -30,8 +46,8 @@ SELECT
     countryfull,
     age,
     CONCAT(TRIM(givenname), ' ', TRIM(surname)) AS cleaned_name,
-    MIN(cr.orderdate) OVER (PARTITION BY cr.customerkey) AS first_purchase_date,
-    EXTRACT(YEAR FROM MIN(cr.orderdate) OVER (PARTITION BY cr.customerkey)) AS cohort_year
+    MIN(cr.orderdate) OVER (PARTITION BY cr.customerkey) AS first_purchase_date,    -- Identify first purchase date
+    EXTRACT(YEAR FROM MIN(cr.orderdate) OVER (PARTITION BY cr.customerkey)) AS cohort_year    -- Determine cohort year
 FROM customer_revenue cr;
 
 
